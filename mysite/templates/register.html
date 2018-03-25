@@ -1,0 +1,131 @@
+{% load staticfiles %}
+<htmllang="en">
+<head>
+	<title>Book Store - Registeration Page</title>
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery lry -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style type="text/css">
+		.wrapper {	
+		margin-top: 80px;
+ 		margin-bottom: 80px;
+	}
+	.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+  border-radius: 5px;
+}
+a{
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+<div>
+<div class="row">
+            <div class=" col-md-4">
+               <a href="#" class="logo pull-left"><img src="{% static 'bookstore.jpg' %}" class="site_logo" alt=""></a>
+            </div>
+            <div class=" col-md-4">
+               </div>
+        </div>
+	<nav class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid">
+			    <ul class="nav navbar-nav">
+			      <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+			      <li>
+                        <a href="#contact"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a>
+                    </li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			      <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			      <li><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	    		</ul>
+		 	</div>
+		</nav>
+		
+	<div class="container">
+	<div class="wrapper">
+	<form action="/register" method="post" class="form-signin">
+	{% csrf_token %}
+    <div class="form-group">
+			Username : <input type="text" name="username" class="form-control">
+		</div>
+		
+		
+		<div class="form-group">
+			Password : <input type="password" name="password" class="form-control">
+		</div>
+		
+		
+		<div class="form-group">
+			Email : <input type="text" name="email" class="form-control">
+		</div>
+				
+		<button type="submit" name="register" class="btn btn-primary" style="position: relative;left: 40%;">Register</button>
+</form>
+	</div>
+	</div>
+	<!--Footer -->
+    <div class="col-md-12 footer-box" style="background-color: black;color: white;text-align: center;">
+    <br>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Send a Quick Query </strong>
+                <hr>
+               <form method="get">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control" required="required" placeholder="Email address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4" id="contact">
+                <strong>Our Location</strong>
+                <hr>
+                <p>
+                     Book Store<br /><br>
+                                    NITK, Surathkal<br />
+                                    </p><p>
+                    Call: <a>+91-9901551546</a><br><br>
+                    Email: <a>shamithasudupa@gmail.com</a><br>
+                </p> </div>
+        </div>
+        </div>
+    <!-- /.col -->
+    <div class="col-md-12 end-box ">
+        &copy; 2018 | &nbsp; All Rights Reserved | &nbsp; www.bookstore.com | &nbsp; 24x7 support | &nbsp; Email us: shamithasudupa@gmail.com
+    </div>
+    <!--Footer end -->
+    </div>
+</body>
+</html>

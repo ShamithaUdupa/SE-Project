@@ -1,0 +1,102 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<title>Book Store</title>
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style type="text/css">
+		.bg 
+		{
+		    /* The image used */
+		    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQyhE2zsacciNX5ZFYvwb6cblGiSc75Z7rNxbt8Q50Ep1SssluHg");
+
+		    /* Full height */
+		    height: 100%; 
+
+		    /* Center and scale the image nicely */
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    background-size: cover;
+		}
+	
+	.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  background-color: white;
+}
+
+.title {
+  color: black;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+p,h1
+{
+	color: black;
+}
+</style>
+
+</head>
+<body>
+	<div class="">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">BOOK STORE</a>
+			    </div>
+			    <ul class="nav navbar-nav">
+			      <li><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+			      <li class="active"><a href="#"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a></li>
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			      <li><a href="signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	    		</ul>
+		 	</div>
+		</nav>
+		<div class="card">
+  <img src="{% static 'shamitha.jpg' %}" alt="Book Store" style="width:100%">
+  <h1>Shamitha Udupa</h1>
+  <p class="title">BOOK STORE</p>
+  <p>NITK Surathkal</p>
+  <p>(+91)9901551546</p>
+  <p>shamithasudupa@gmai.com</p>
+  <a href="#"><i class="fa fa-dribbble"></i></a>
+  <a href="#"><i class="fa fa-twitter"></i></a>
+  <a href="#"><i class="fa fa-linkedin"></i></a>
+  <a href="#"><i class="fa fa-facebook"></i></a>
+  <p><button>Contact</button></p>
+</div>
+	</div>
+</body>
+</html>

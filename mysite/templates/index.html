@@ -1,0 +1,289 @@
+{% load staticfiles %}
+<html lang="en">
+<head>
+	<title>Book Store</title>
+	 <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#flip").click(function(){
+				$('html,body').animate({scrollTop:$("#panel").offset().top},'slow');
+			});
+			$('.cartnot').on('click',function(){
+				var quantity=parseInt($(this).prev().prev().prev().prev().text(),10);
+				if(quantity==0){
+					$(this).prev().prev().prev().prev().prev().show();
+				}
+				else{
+					alert("Please Login before adding to cart!");	
+				}
+				
+			});
+			$('.cart').on('click',function(){
+				var quantity=parseInt($(this).prev().prev().prev().prev().text(),10);
+				if(quantity==0){
+					$(this).prev().prev().prev().prev().prev().show();
+				}
+				else{
+					isbn=$(this).prev().prev().prev().text();
+				location.href="/shoppingcart?isbn="+isbn+"&action=add";	
+				}
+				
+			});
+			$('.flexslider').flexslider({
+						animation: "fade",
+						slideshowSpeed: 4000,
+						animationSpeed: 600,
+						controlNav: false,
+						directionNav: true,
+						controlsContainer: ".flex-container" // the container that holds the flexslider
+					});
+			// Instantiate the Bootstrap carousel
+$('.multi-item-carousel').carousel({
+  interval: false
+});
+
+// for every slide in carousel, copy the next slide's item in the slide.
+// Do the same for the next, next item.
+$('.multi-item-carousel .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  if (next.next().length>0) {
+    next.next().children(':first-child').clone().appendTo($(this));
+  } else {
+  	$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+  }
+});
+		});
+		
+	</script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style type="text/css">
+		.multi-item-carousel{
+  .carousel-inner{
+    > .item{
+      transition: 500ms ease-in-out left;
+    }
+    .active{
+      &.left{
+        left:-33%;
+      }
+      &.right{
+        left:33%;
+      }
+    }
+    .next{
+      left: 33%;
+    }
+    .prev{
+      left: -33%;
+    }
+    @media all and (transform-3d), (-webkit-transform-3d) {
+      > .item{
+        // use your favourite prefixer here
+        transition: 500ms ease-in-out left;
+        transition: 500ms ease-in-out all;
+        backface-visibility: visible;
+        transform: none!important;
+      }
+    }
+  }
+  .carouse-control{
+    &.left, &.right{
+      background-image: none !important;
+      filter: none !important;
+    }
+  }
+}
+.carousel-control {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2%;  /* change this value to required width */
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  background-color: #B22222;
+  opacity: .5;
+}
+		.thumbnail img{
+			width: 100%;
+			height: 150px;
+			position: relative;
+		}
+		.caption{
+			position: absolute;
+			top:30%;
+			left:19%;
+		}
+		.thumbnail{
+			width: 80%
+		}
+		a{
+			font-weight: bold;
+		}
+		#panel p{
+			text-align: center;
+			font-weight: bold;
+			font-family: 'Times New Roman';
+		}
+	</style>
+</head>
+<body>
+	<div class="">
+		<div class="row">
+			<div class=" col-md-4">
+			   <a href="#" class="logo pull-left"><img src="{% static 'bookstore.jpg' %}" class="site_logo" alt=""></a>
+		 	</div>
+		 	<div class=" col-md-4">
+			   </div>
+		 	<div class=" col-md-4" style="margin-top: 25px;position: relative;left: 10%;">
+			    <form action="user" method="get" class="form-inline">
+			      	<div class="form-group">
+				      	<input type="text" name="query" class="form-control" placeholder="Search">
+				      	
+					<button type="submit" class="btn btn-success" name="submit" value="search">
+					<span class="glyphicon glyphicon-search" ></span>
+				</button>
+			      	</div>
+			      </form>
+		 	</div>
+		</div>
+		
+		<nav class="navbar navbar-inverse" role="navigation" style="margin-bottom: 0px;">
+			<div class="container-fluid">
+			    <ul class="nav navbar-nav">
+			      <li><a href="#"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+			      <li>
+                        <a href="#contact"><span class="glyphicon glyphicon-envelope"></span> Contact Us</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    	<li><a href="/shoppingcart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+				  <li><a href="/sellingcart"><span class="glyphicon glyphicon-upload"></span> Sell</a></li>
+                    {% endif %}
+			    </ul>
+			    <ul class="nav navbar-nav navbar-right">
+			      {% if user.is_authenticated %}
+				      	<li><a href="profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+				      <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			      {% else %}
+				      <li><a href="signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+				      <li><a href="accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			      {% endif %}
+	    		</ul>
+		 	</div>
+		</nav>
+		<div class="row">
+
+		<div style="margin-top: 0px;margin-bottom: 0px;" class="col-md-12">
+				 
+				        <img src="{% static 'book1.jpg'%}" alt="Book" style="width:100%;height:200px;">			
+			</div>
+
+			</div>
+<hr style="border: 2px solid black;margin-top: 0px;">
+	<div id="panel" class="pd">
+		<div class="row">
+    <div class="col-md-12">
+      <div class="carousel slide multi-item-carousel" id="theCarousel">
+        <div class="carousel-inner">
+        <div class="item active">
+           
+             
+        {% for c in context %}
+           <div class="col-md-4">
+            	<div class="thumbnail" style="margin:20px 20px 20px 20px;">
+					<img src="{% static c.image %}">
+					<p><b> {{c.title}}</b></p>
+					<div class="caption" style="display: none;"><p style="font-size: 50px;font-weight: bold">Sold Out</p></div>
+					<span hidden="hidden">{{c.quantity}}</span>
+					<span hidden="hidden">{{c.isbn}}</span>
+					<p><small>{{c.author}}</small> </p>
+					<p><small>Rs. {{c.price}}</small></p>
+					{% if user.is_authenticated %}
+						<button style="background-color: #B22222;border:none;border-radius: 0;position: relative;left:35%" type="button" class="btn btn-primary cart"><b>Add to cart</b></button>
+					{% else %}
+						<button style="background-color: #B22222;border:none;border-radius: 0;position: relative;left:35%" type="button" class="btn btn-primary cartnot"><b>Add to cart</b></button>
+					{% endif %}
+				</div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+       </div>
+       <div class="item">
+       {% endif %}  
+          {% endfor %}
+        </div>
+        <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+  </div>
+	</div>
+	
+	<!--Footer -->
+    <div class="col-md-12 footer-box" style="background-color: black;color: white;text-align: center;">
+    <br>
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Send a Quick Query </strong>
+                <hr>
+               <form action="" method="get">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="name" required="required" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="email" required="required" placeholder="Email address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4" id="contact">
+                <strong>Our Location</strong>
+                <hr>
+                <p>
+                     Book Store<br /><br>
+                                    NITK, Surathkal<br />
+                                    </p><p>
+                    Call: <a>+91-9901551546</a><br><br>
+                    Email: <a>shamithasudupa@gmail.com</a><br>
+                </p> </div>
+        </div>
+        </div>
+    <!-- /.col -->
+    <div class="col-md-12 end-box ">
+        &copy; 2018 | &nbsp; All Rights Reserved | &nbsp; www.bookstore.com | &nbsp; 24x7 support | &nbsp; Email us: shamithasudupa@gmail.com
+    </div>
+    <!--Footer end -->
+    </div>
+</body>
+</html>
